@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const [color, setColor] = useState("red");
-  const colors = ["red", "green", "white", "black"];
+  const colors = ["red", "green", "white", "black", "green"];
   const currentColor = color;
   const mes = (c) => {
     setColor(c);
