@@ -1,17 +1,34 @@
 import { useState } from 'react'
 import Top from './components/Top';
 import Ingredients_list from './components/Ingredients_list';
+import {getRecipeFromMistral} from "./components/Ai.js"
+import Markdown from 'react-markdown'
 
 function App() {
   const [count, setCount] = useState([]);
+  const [haveRecipe, setHaveRecipe]= useState(false);
+  const [newRecipe, setNewRecipe]= useState();
   const fun = (value)=>{
     // console.log(value);
-    // console.log(11111111);
+    //console.log(11111111);
     setCount([...count, value]);
   }
-  const disPlayList = count.map((item) =>{
-    <li key={item}>{item}</li>
-  })
+  const showRecipe = ()=>{
+    setHaveRecipe(!haveRecipe);
+  }
+
+  async function getReipe() {
+    const recipe =  await getRecipeFromMistral(count);
+    // for(let i=0;i<recipe.length;i++){
+    //   console.log(recipe[i]);
+      
+    // }
+    console.log(recipe);
+    //setHaveRecipe(!haveRecipe);
+    setNewRecipe(recipe);
+    showRecipe();
+  }
+  
   return (
     <>
     <br />
@@ -20,15 +37,48 @@ function App() {
         <Top></Top>
         <br />
         <div className="bg-color">
-          <Ingredients_list fun={fun}/>
+          <Ingredients_list funfuntion={fun}/>
         </div>
-        <ul className='list-group list-group-flush'>
-          {
-            count.map((item)=>(
-              <li key={item} className='list-group-item'>{item}</li>
-            ))
-          }
-        </ul>
+        
+        {
+          count.length>0 &&
+          <div>
+
+            <h3>IngreDients On Hand</h3>
+            <ul className='list-group list-group-flush'>
+              {
+                count.map((item)=>(
+                  <li key={item} className='list-group-item'>{item}</li>
+                ))
+              }
+            </ul>
+
+
+            <section className='section-design d-flex gap-3 p-4 '>
+              <div className='d-flex justify-content-center align-items-center p-2'>
+                <div>
+                  <h3>Ready For A Recipe ?</h3>
+                  <p>Generate A Recipe From Your List Of Ingredients.</p>
+                </div>
+                <button className='btn btn-warning' onClick={()=>{
+                  getReipe()
+                }}>Get A Recipe</button>
+              </div>
+            </section>
+          </div>
+        }
+        {
+          haveRecipe ?
+          <div>
+            <Markdown>
+            {newRecipe}
+            </Markdown>
+            <p></p>
+          </div> :
+          <div>
+            I Don't Have It
+          </div>
+        }
       </div>
     </div>
       {/* <div className="card" style="width: 18rem;">
