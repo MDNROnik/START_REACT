@@ -4,13 +4,17 @@ import React from 'react'
 // }
 
 
-const Ingredients_list = ({fun}) => {
+const Ingredients_list = ({funfuntion}) => {
   function submit(event){
     event.preventDefault();
     const data =new FormData( event.currentTarget );
+    console.log(Object.fromEntries(data));
+    
     const ingre = data.get("ingre");
-    fun(ingre);
+    funfuntion(ingre);
+    event.currentTarget.reset();
   }
+  
   return (
     <>
     <form onSubmit={submit}>
