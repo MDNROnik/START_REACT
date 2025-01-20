@@ -43,8 +43,5 @@ export async function getRecipeFromMistral(ingredientsArr) {
     } catch (err) {
         console.error(err.message)
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6df421ffd41cbe6b8aa349b2e72dc83bc5b70447
+
