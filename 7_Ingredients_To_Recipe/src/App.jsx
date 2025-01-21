@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { useState } from 'react'
 import Top from './components/Top';
 import Ingredients_list from './components/Ingredients_list';
@@ -8,6 +9,7 @@ function App() {
   const [count, setCount] = useState([]);
   const [haveRecipe, setHaveRecipe]= useState(false);
   const [newRecipe, setNewRecipe]= useState();
+
   const fun = (value)=>{
     // console.log(value);
     //console.log(11111111);
@@ -16,6 +18,7 @@ function App() {
   const showRecipe = ()=>{
     setHaveRecipe(!haveRecipe);
   }
+ 
 
   async function getReipe() {
     const recipe =  await getRecipeFromMistral(count);
@@ -23,7 +26,7 @@ function App() {
     //   console.log(recipe[i]);
       
     // }
-    console.log(recipe);
+    //console.log(recipe);
     //setHaveRecipe(!haveRecipe);
     setNewRecipe(recipe);
     showRecipe();
@@ -37,7 +40,7 @@ function App() {
         <Top></Top>
         <br />
         <div className="bg-color">
-          <Ingredients_list funfuntion={fun}/>
+          <Ingredients_list funfuntion={fun} />
         </div>
         
         {
@@ -56,11 +59,11 @@ function App() {
 
             <section className='section-design d-flex gap-3 p-4 '>
               <div className='d-flex justify-content-center align-items-center p-2'>
-                <div>
-                  <h3>Ready For A Recipe ?</h3>
+                <div >
+                  <h3 >Ready For A Recipe ?</h3>
                   <p>Generate A Recipe From Your List Of Ingredients.</p>
                 </div>
-                <button className='btn btn-warning' onClick={()=>{
+                <button  className='btn btn-warning' onClick={()=>{
                   getReipe()
                 }}>Get A Recipe</button>
               </div>

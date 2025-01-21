@@ -4,14 +4,14 @@ import React from 'react'
 // }
 
 
-const Ingredients_list = ({funfuntion}) => {
+const Ingredients_list = (props) => {
   function submit(event){
     event.preventDefault();
     const data =new FormData( event.currentTarget );
     console.log(Object.fromEntries(data));
     
     const ingre = data.get("ingre");
-    funfuntion(ingre);
+    props.funfuntion(ingre);
     event.currentTarget.reset();
   }
   
