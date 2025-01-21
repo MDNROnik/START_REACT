@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 export default function Main() {
-  const [count, setcount] = React.useState(0);
+  const [count, setcount] = React.useState({});
   const [meme, setMeme] = React.useState({
     topText: "One does not simply",
     bottomText: "Walk into Mordor",
-    imgUrl: "",
+    imgUrl: "http://i.imgflip.com/1bij.jpg",
   });
 
   function handlefuction(event) {
@@ -15,21 +15,26 @@ export default function Main() {
       [name]: value,
     }));
   }
+  function set_image(){
+    const randomNumber = Math.floor(Math.random() * count.length);
+    const u = count[randomNumber].url;
+    setMeme((meme) => ({
+        ...meme,
+        imgUrl: u,
+      }));
+  }
   useEffect(() => {
+    console.log(1111111);
+    
     fetch("https://api.imgflip.com/get_memes")
       .then((res) => res.json())
       .then((obj) => {
         const { data } = obj;
         const { memes } = data;
         console.log(data);
-        const randomNumber = Math.floor(Math.random() * memes.length);
-        const u = memes[randomNumber].url;
-        setMeme((meme) => ({
-          ...meme,
-          imgUrl: u,
-        }));
+        setcount(memes);
       });
-  }, [count]);
+  }, []);
 
   return (
     <main>
@@ -54,9 +59,7 @@ export default function Main() {
           />
         </label>
         <button
-          onClick={function () {
-            setcount(count + 1);
-          }}
+          onClick={set_image}
         >
           Get a new meme image 🖼
         </button>
