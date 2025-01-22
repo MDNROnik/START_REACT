@@ -3,30 +3,18 @@ import { useState } from "react";
 const Button = () => {
   //button id and states
   const [tab_btn, setButton] = useState([
-    { id: 1, state: false },
-    { id: 2, state: false },
-    { id: 3, state: false },
-    { id: 4, state: false },
-    { id: 5, state: false },
-    { id: 6, state: false },
-    { id: 7, state: false },
-    { id: 8, state: false },
-    { id: 9, state: false },
-    { id: 10, state: false },
+    { id: 1, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 2, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 3, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 4, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 5, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 6, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 7, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 8, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 9, state: false, value: Math.floor(Math.random() * 10) + 1 },
+    { id: 10, state: false, value: Math.floor(Math.random() * 10) + 1 },
   ]);
-  // set random number for all buttons
-  const [randomNumber, setRandomNumber] = useState([
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-    Math.floor(Math.random() * 10) + 1,
-  ]);
+
   // one time number setup
   const [keyNumber, setKeyNumber] = useState({
     key: -1,
@@ -46,33 +34,44 @@ const Button = () => {
             if (!keyNumber.state) {
               setKeyNumber({
                 ...keyNumber,
-                key: randomNumber[key],
+                key: tab_btn[key].value,
                 state: true,
               });
             }
 
             // set up button color and set up next random numbers
             console.log(keyNumber.key);
-            
+
             if (
               !item.state &&
-              (randomNumber[key] == keyNumber.key || keyNumber.state === false)
+              (tab_btn[key].value == keyNumber.key || keyNumber.state === false)
             ) {
+              console.log(1111);
+              
               setButton(
                 tab_btn.map((index) =>
                   index.id === key + 1
-                    ? { ...index, state: !index.state }
+                    ? {
+                        ...index,
+                        state: !index.state,
+                        value: tab_btn[key].value,
+                      }
                     : index
                 )
               );
             } else {
-              setRandomNumber(
-                randomNumber.map(() => Math.floor(Math.random() * 10) + 1)
+              console.log(22222);
+              setButton(
+                tab_btn.map((index) =>
+                  index.state === true
+                    ? index
+                    : { ...index, value: Math.floor(Math.random() * 10) + 1 }
+                )
               );
             }
           }}
         >
-          {tab_btn[key].state ? keyNumber.key : randomNumber[key]}
+          {tab_btn[key].value}
         </button>
       ))}
     </>
