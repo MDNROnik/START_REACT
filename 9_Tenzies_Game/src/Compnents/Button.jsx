@@ -14,6 +14,7 @@ const Button = () => {
     { id: 9, state: false, value: Math.floor(Math.random() * 10) + 1 },
     { id: 10, state: false, value: Math.floor(Math.random() * 10) + 1 },
   ]);
+  const [btn, setBtn] = useState(0);
 
   // one time number setup
   const [keyNumber, setKeyNumber] = useState({
@@ -59,15 +60,7 @@ const Button = () => {
                     : index
                 )
               );
-            } else {
-              console.log(22222);
-              setButton(
-                tab_btn.map((index) =>
-                  index.state === true
-                    ? index
-                    : { ...index, value: Math.floor(Math.random() * 10) + 1 }
-                )
-              );
+              setBtn(btn + 1);
             }
           }}
         >
@@ -75,28 +68,52 @@ const Button = () => {
         </button>
       ))}
       <br />
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => {
+      {btn < 10 ? (
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(22222);
+            setButton(
+              tab_btn.map((index) =>
+                index.state === true
+                  ? index
+                  : { ...index, value: Math.floor(Math.random() * 10) + 1 }
+              )
+            );
+          }}
+        >
+          ROLL
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
 
-          setKeyNumber({
-            ...keyNumber,
-            key: (tab_btn[0].value - (tab_btn[0].value+1)) ,
-            state: false,
-          });
+            setBtn(0);
+            setKeyNumber({
+              ...keyNumber,
+              key: tab_btn[0].value - (tab_btn[0].value + 1),
+              state: false,
+            });
 
-          setButton(
-            tab_btn.map((index, key)=>
-              key>9 ?
-            index:
-            {...index, state:false, value: Math.floor(Math.random() * 10) + 1  }
-            )
-          );
-        }}
-      >
-        ROLL
-      </button>
+            setButton(
+              tab_btn.map((index, key) =>
+                key > 9
+                  ? index
+                  : {
+                      ...index,
+                      state: false,
+                      value: Math.floor(Math.random() * 10) + 1,
+                    }
+              )
+            );
+          }}
+        >
+          NEW
+        </button>
+      )}
     </>
   );
 };
