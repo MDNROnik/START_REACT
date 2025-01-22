@@ -40,14 +40,14 @@ const Button = () => {
             }
 
             // set up button color and set up next random numbers
-            console.log(keyNumber.key);
+            console.log(keyNumber.key, item.value);
 
             if (
               !item.state &&
               (tab_btn[key].value == keyNumber.key || keyNumber.state === false)
             ) {
               console.log(1111);
-              
+
               setButton(
                 tab_btn.map((index) =>
                   index.id === key + 1
@@ -74,6 +74,29 @@ const Button = () => {
           {tab_btn[key].value}
         </button>
       ))}
+      <br />
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => {
+
+          setKeyNumber({
+            ...keyNumber,
+            key: (tab_btn[0].value - (tab_btn[0].value+1)) ,
+            state: false,
+          });
+
+          setButton(
+            tab_btn.map((index, key)=>
+              key>9 ?
+            index:
+            {...index, state:false, value: Math.floor(Math.random() * 10) + 1  }
+            )
+          );
+        }}
+      >
+        ROLL
+      </button>
     </>
   );
 };
