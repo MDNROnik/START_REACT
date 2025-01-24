@@ -24,14 +24,12 @@ const Button = () => {
   });
   const buttonRef = useRef(null);
 
-  
-  
   useEffect(() => {
     console.log("use effect", gameOver);
-    
+
     if (gameOver) {
       console.log("in");
-      
+
       buttonRef.current.focus();
     }
   }, [gameOver]);
@@ -67,7 +65,7 @@ const Button = () => {
         )
       );
       setBtn(btn + 1);
-      if(btn===9){
+      if (btn === 9) {
         setGameOver(!gameOver);
       }
     }
