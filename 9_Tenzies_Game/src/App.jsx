@@ -1,12 +1,13 @@
-import './App.css'
-import Button from './Compnents/Button'
-function App() {
+import Button from "./Compnents/Button";
 
+function App() {
   return (
-    <>
-      <Button />
-    </>
-  )
+    <main>
+      <>
+        <Button />
+      </>
+    </main>
+  );
 }
 
-export default App
+export default App;
