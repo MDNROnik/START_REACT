@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { generate, count } from "random-words";
+import { generate } from "random-words";
 import "./App.css";
 
 function App() {
@@ -33,7 +33,6 @@ function App() {
     "Spider-Man",
     "The Scarlet Witch",
   ];
-  console.log(randomWord);
 
   useEffect(() => {
     setRandomWord(generate({ maxLength: 10 }));
@@ -51,14 +50,11 @@ function App() {
   }, [count2]);
 
   function fun() {
-    // console.log("fun");
     setCount1(count1 + 1);
     setLife(10);
   }
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   function fun2() {
-    console.log("fun2");
-
     return alphabet.split("").map((letter, key) => {
       return (
         <button
@@ -74,16 +70,10 @@ function App() {
     });
   }
   function fun5() {
-    console.log("fun5");
-
     return alphabet.split("").map((letter, key) => {
       return (
         <button
           key={key}
-          onClick={() => {
-            // fun3(letter);
-            console.log("fun5");
-          }}
           className="bg-blue-300 pointer-events-none hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
         >
           {letter}
@@ -102,26 +92,19 @@ function App() {
         return item;
       }
     });
-    // console.log(newValue);
     setSecretWord(newValue);
-    console.log(found);
 
     if (!found) {
       setLife(life - 1);
       const newHeroes = heroes.filter((hero, key) => {
         return key !== 0;
       });
-      // console.log(newHeroes);
       setHeroes(newHeroes);
-      // console.log(heroes);
     } else {
-      // console.log("found");
       setFoundWords(foundWords + 1);
     }
   }
-  // console.log(life);
 
-  // console.log(foudWords, randomWord.length);
   function fun4() {
     return heroes.map((hero, key) => {
       return (
@@ -134,7 +117,6 @@ function App() {
       );
     });
   }
-  console.log(foundWords, randomWord.length);
 
   return (
     <>
@@ -170,7 +152,6 @@ function App() {
       <br />
       <button onClick={fun}>new</button>
 
-      {/* <main>{fun2()}</main> */}
       <br />
       {life > 0 && foundWords < randomWord.length ? (
         <main>{fun2()}</main>
