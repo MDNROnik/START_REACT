@@ -1,35 +1,153 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import { generate, count } from "random-words";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [randomWord, setRandomWord] = useState("");
+  const [secretWord, setSecretWord] = useState([]);
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
+  const [life, setLife] = useState(10);
+  const [foundWords, setFoundWords] = useState(0);
+  const [heroes, setHeroes] = useState([
+    "Iron Man",
+    "Captain America",
+    "Thor",
+    "Hulk",
+    "Black Widow",
+    "Hawkeye",
+    "Black Panther",
+    "Doctor Strange",
+    "Spider-Man",
+    "The Scarlet Witch",
+  ]);
+  const allTimeHeroes = [
+    "Iron Man",
+    "Captain America",
+    "Thor",
+    "Hulk",
+    "Black Widow",
+    "Hawkeye",
+    "Black Panther",
+    "Doctor Strange",
+    "Spider-Man",
+    "The Scarlet Witch",
+  ];
+  console.log(randomWord);
 
+  useEffect(() => {
+    setRandomWord(generate());
+    setCount2(count2 + 1);
+    setHeroes(allTimeHeroes);
+  }, [count1]);
+
+  useEffect(() => {
+    setSecretWord(
+      randomWord.split("").map((letter, key) => {
+        return { letter: letter.toUpperCase(), guessed: false };
+      })
+    );
+  }, [count2]);
+
+  function fun() {
+    // console.log("fun");
+    setCount1(count1 + 1);
+    setLife(10);
+  }
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  function fun2() {
+    return alphabet.split("").map((letter, key) => {
+      return (
+        <button
+          key={key}
+          onClick={() => {
+            fun3(letter);
+          }}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        >
+          {letter}
+        </button>
+      );
+    });
+  }
+  function fun3(letter) {
+    let found = false;
+    const newValue = secretWord.map((item) => {
+      if (letter === item.letter && found == false && item.guessed == false) {
+        found = true;
+        return { ...item, guessed: true };
+      } else {
+        return item;
+      }
+    });
+    // console.log(newValue);
+    setSecretWord(newValue);
+    console.log(found);
+
+    if (!found) {
+      setLife(life - 1);
+      const newHeroes = heroes.filter((hero, key) => {
+        return key !== 0;
+      });
+      // console.log(newHeroes);
+      setHeroes(newHeroes);
+      // console.log(heroes);
+    } else {
+      // console.log("found");
+      setFoundWords(foundWords + 1);
+    }
+  }
+  // console.log(life);
+
+  // console.log(foudWords, randomWord.length);
+  function fun4() {
+    return heroes.map((hero, key) => {
+      return (
+        <span
+          key={key}
+          class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >
+          {hero}
+        </span>
+      );
+    });
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{life}</h1>
+      <h1 className="bg-blue-500">{randomWord}</h1>
+
+      <main>{fun4()}</main>
+      {foundWords === randomWord.length ? (
+        <h1>you win</h1>
+      ) : life <= 0 ? (
+        <h1>you lose</h1>
+      ) : (
+        <h1>keep playing</h1>
+      )}
+      {secretWord.map((letter, key) => {
+        if (letter.guessed) {
+          return (
+            <span
+              key={key}
+              className="inline-block bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+            >
+              {letter.letter}
+            </span>
+          );
+        } else {
+          return (
+            <span className="inline-block bg-gray-200 px-3 py-3 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              {}
+            </span>
+          );
+        }
+      })}
+      <br />
+      <button onClick={fun}>new</button>
+      <main>{fun2()}</main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
