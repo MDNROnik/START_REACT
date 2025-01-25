@@ -36,9 +36,10 @@ function App() {
   console.log(randomWord);
 
   useEffect(() => {
-    setRandomWord(generate());
+    setRandomWord(generate({ maxLength: 10 }));
     setCount2(count2 + 1);
     setHeroes(allTimeHeroes);
+    setFoundWords(0);
   }, [count1]);
 
   useEffect(() => {
@@ -56,6 +57,8 @@ function App() {
   }
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   function fun2() {
+    console.log("fun2");
+
     return alphabet.split("").map((letter, key) => {
       return (
         <button
@@ -63,13 +66,32 @@ function App() {
           onClick={() => {
             fun3(letter);
           }}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-1"
         >
           {letter}
         </button>
       );
     });
   }
+  function fun5() {
+    console.log("fun5");
+
+    return alphabet.split("").map((letter, key) => {
+      return (
+        <button
+          key={key}
+          onClick={() => {
+            // fun3(letter);
+            console.log("fun5");
+          }}
+          className="bg-blue-300 pointer-events-none hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        >
+          {letter}
+        </button>
+      );
+    });
+  }
+
   function fun3(letter) {
     let found = false;
     const newValue = secretWord.map((item) => {
@@ -112,6 +134,8 @@ function App() {
       );
     });
   }
+  console.log(foundWords, randomWord.length);
+
   return (
     <>
       <h1>{life}</h1>
@@ -145,7 +169,14 @@ function App() {
       })}
       <br />
       <button onClick={fun}>new</button>
-      <main>{fun2()}</main>
+
+      {/* <main>{fun2()}</main> */}
+      <br />
+      {life > 0 && foundWords < randomWord.length ? (
+        <main>{fun2()}</main>
+      ) : (
+        <main>{fun5()}</main>
+      )}
     </>
   );
 }
