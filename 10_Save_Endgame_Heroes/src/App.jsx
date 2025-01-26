@@ -62,7 +62,7 @@ function App() {
           onClick={() => {
             fun3(letter);
           }}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm m-1 "
+          className="bg-amber-500 hover:bg-amber-700 text-black font-bold py-2 px-4 rounded-sm m-1 "
         >
           {letter}
         </button>
@@ -74,7 +74,7 @@ function App() {
       return (
         <button
           key={key}
-          className="bg-blue-300 pointer-events-none hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm m-1"
+          className="bg-amber-500 hover:bg-amber-700 text-black pointer-events-none  font-bold py-2 px-4 rounded-sm m-1"
         >
           {letter}
         </button>
@@ -121,8 +121,8 @@ function App() {
   return (
     <div className="bg-neutral-950 h-screen p-10">
       <div className=" ">
-        <h1>{life}</h1>
-        <h1 className="text-white">{randomWord}</h1>
+        {/* <h1>{life}</h1>
+        <h1 className="text-white">{randomWord}</h1> */}
 
         <header className="text-center  text-white p-4">
           <h1 className="text-xl"> Save EndGame Heores</h1>
@@ -137,8 +137,10 @@ function App() {
             <p>Well Done!</p>
           </section>
         ) : life <= 0 ? (
+          
           <section className="text-center bg-red-600 text-white flex flex-col items-center justify-center p-4 rounded-sm">
             <h2>You Loss!</h2>
+            <p>The Word Was "{randomWord}"</p>
             <p>Try Again!</p>
           </section>
         ) : (
@@ -183,6 +185,7 @@ function App() {
           </section>
         ) : (
           <section className="flex flex-wrap justify-center items-center">
+            
             {fun5()}
           </section>
         )}
