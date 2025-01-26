@@ -132,14 +132,17 @@ function App() {
         </header>
 
         {foundWords === randomWord.length ? (
-          <section className="text-center bg-green-600 text-white flex flex-col items-center justify-center p-4 ">
+          <section className="text-center bg-green-600 text-white flex flex-col items-center justify-center p-4 rounded-sm">
             <h2>You Win!</h2>
             <p>Well Done!</p>
           </section>
         ) : life <= 0 ? (
-          <h1>you lose</h1>
+          <section className="text-center bg-red-600 text-white flex flex-col items-center justify-center p-4 rounded-sm">
+            <h2>You Loss!</h2>
+            <p>Try Again!</p>
+          </section>
         ) : (
-          <section className="content-center bg-white flex flex-col items-center justify-center p-4 ">
+          <section className="content-center bg-white flex flex-col items-center justify-center p-4 rounded-sm">
             <h2 className="text-xl">Keep Playing </h2>
             <p>You Can Do IT</p>
           </section>
@@ -171,15 +174,27 @@ function App() {
         </section>
 
         <br />
-        <button onClick={fun}>new</button>
 
         <br />
 
         {life > 0 && foundWords < randomWord.length ? (
-          <section className="flex flex-wrap justify-center items-center">{fun2()}</section>
+          <section className="flex flex-wrap justify-center items-center">
+            {fun2()}
+          </section>
         ) : (
-          <section className="flex flex-wrap justify-center items-center">{fun5()}</section>
+          <section className="flex flex-wrap justify-center items-center">
+            {fun5()}
+          </section>
         )}
+        <br />
+        <div className="flex flex-wrap justify-center items-center">
+          <button
+            className="bg-transparent hover:bg-sky-500 text-white font-semibold hover:text-white py-2 px-4 border border-sky-500 hover:border-transparent rounded"
+            onClick={fun}
+          >
+            new
+          </button>
+        </div>
       </div>
     </div>
   );
