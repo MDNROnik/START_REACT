@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { generate } from "random-words";
-import "./App.css";
 
 function App() {
   const [randomWord, setRandomWord] = useState("");
@@ -137,7 +136,6 @@ function App() {
             <p>Well Done!</p>
           </section>
         ) : life <= 0 ? (
-          
           <section className="text-center bg-red-600 text-white flex flex-col items-center justify-center p-4 rounded-sm">
             <h2>You Loss!</h2>
             <p>The Word Was "{randomWord}"</p>
@@ -185,7 +183,6 @@ function App() {
           </section>
         ) : (
           <section className="flex flex-wrap justify-center items-center">
-            
             {fun5()}
           </section>
         )}
