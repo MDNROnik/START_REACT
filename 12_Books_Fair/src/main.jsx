@@ -7,7 +7,7 @@ import Error from "./Components/Error/Error.jsx";
 import Home from "./Components/Home/Home.jsx";
 import PersonalList from "./Components/PersonalList/PersonalList.jsx";
 import Root from "./Components/Root/Root.jsx";
-
+import { ToastContainer, toast } from 'react-toastify';
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -45,5 +45,6 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     {/* <App /> */}
     <RouterProvider router={router} />
+    <ToastContainer />
   </StrictMode>
 );
