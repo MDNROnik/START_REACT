@@ -7,9 +7,6 @@ const Books = () => {
     fetch("BooksData.json")
       .then((res) => res.json())
       .then((data) => setAllBooks(data));
-    // console.log("====================================");
-    // console.log("allBooks", allBooks.length);
-    // console.log("====================================");
   }, [loaded]);
   useEffect(() => {
     if (allBooks.length > 0) {

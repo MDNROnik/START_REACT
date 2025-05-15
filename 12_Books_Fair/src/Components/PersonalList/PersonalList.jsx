@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import Book from "../Books/Book";
 
 import { getData } from "../../Utility/addToDB";
 
@@ -9,16 +10,52 @@ const PersonalList = () => {
   const [readList, setReadList] = useState([]);
   const [wishList, setWishList] = useState([]);
   const [sort, setSort] = useState("");
+  const [allBooks, setAllBooks] = useState([]);
+  const [loaded, setLoaded] = useState(true);
+
+  const [showReadList, setShowReadList] = useState([]);
+  const [showWishList, setShowWishList] = useState([]);
 
   const handleSort = (type) => {
     console.log(type);
     console.log(initialReadList);
     console.log(initialWishList);
+    console.log(allBooks);
+    console.log(showReadList);
+    console.log(showWishList);
   };
+
   useEffect(() => {
-    setReadList(initialReadList);
-    setWishList(initialWishList);
-  }, [initialReadList, initialWishList]);
+    fetch("BooksData.json")
+      .then((res) => res.json())
+      .then((data) => setAllBooks(data));
+    const temp1 = initialReadList.map((book) => book.id);
+    const temp2 = initialWishList.map((book) => book.id);
+    setReadList(temp1);
+    setWishList(temp2);
+    // console.log(initialReadList);
+    // console.log(initialWishList);
+
+    allBooks.forEach((book) => {
+      if (readList.includes(book.bookId)) {
+        // console.log("in read list", book.bookId);
+
+        setShowReadList((prev) => [...prev, book]);
+      }
+
+      if (wishList.includes(book.bookId)) {
+        setShowWishList((prev) => [...prev, book]);
+      }
+    });
+  }, [loaded, initialReadList, initialWishList]);
+
+  useEffect(() => {
+    if (allBooks.length > 0) {
+      setLoaded(false);
+    } else {
+      setLoaded(true);
+    }
+  }, [allBooks]);
 
   return (
     <div>
@@ -41,11 +78,17 @@ const PersonalList = () => {
 
         <TabPanel>
           <h2>My Read List</h2>
-          <p>{readList.length}</p>
+          <p>{showReadList.length}</p>
+          {showReadList.map((b) => (
+            <Book key={b.bookId} singleBook={b}></Book>
+          ))}
         </TabPanel>
         <TabPanel>
           <h2>My Wish List</h2>
-          <p>{wishList.length}</p>
+          <p>{showWishList.length}</p>
+          {showWishList.map((b) => (
+            <Book key={b.bookId} singleBook={b}></Book>
+          ))}
         </TabPanel>
       </Tabs>
     </div>
