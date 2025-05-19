@@ -3,4 +3,6 @@
 
 body {
   @apply bg-white; /* Set background color here */
+  @apply text-black; /* Global text color */
+
 }
