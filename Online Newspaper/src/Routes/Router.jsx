@@ -4,7 +4,7 @@ import HomeLayout from "../Layout/HomeLayout";
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeLayout>HOME</HomeLayout>,
+    element: <HomeLayout />,
   },
   {
     path: "/news",
