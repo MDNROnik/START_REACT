@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
-
+import NewsCared from "../Components/NewsCared";
 const CategoryNews = () => {
   const { id } = useParams();
   const [news, setNews] = useState([]);
@@ -29,6 +29,11 @@ const CategoryNews = () => {
     <div>
       <h1>CategoryNews {id}</h1>
       <h2>News {news.length}</h2>
+      {
+        news?.map((singleNews) => (
+            <NewsCared key={singleNews.id} news={singleNews}></NewsCared>
+        ))
+      }
     </div>
   );
 };
