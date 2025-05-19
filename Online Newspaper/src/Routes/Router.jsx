@@ -15,6 +15,10 @@ const Router = createBrowserRouter([
     element: <h1>AUTH</h1>,
   },
   {
+    path: "/catagory/:id",
+    element: <h1>Catagory</h1>,
+  },
+  {
     path: "*",
     element: <h1>404</h1>,
   },
