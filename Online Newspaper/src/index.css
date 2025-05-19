@@ -4,5 +4,9 @@
 body {
   @apply bg-white; /* Set background color here */
   @apply text-black; /* Global text color */
+}
 
+a.active {
+  @apply bg-black /* Active link color */;
+  @apply text-white /* Active text color */;
 }
