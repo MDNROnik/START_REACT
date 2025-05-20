@@ -6,7 +6,7 @@ const Signup = () => {
   const [nameError, setNameError] = useState("");
 
   const navigate = useNavigate();
-  const { createNewUser } = useContext(AuthContext);
+  const { createNewUser, updateUserProfile } = useContext(AuthContext);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -24,9 +24,20 @@ const Signup = () => {
     console.log({ name, photo, email, password });
     createNewUser(email, password)
       .then((result) => {
+        // eslint-disable-next-line no-unused-vars
         const user = result.user;
-        console.log(user);
-        navigate("/catagory/0");
+        // console.log(user);
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            // Profile updated!
+            // ...
+            navigate("/catagory/0");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage, errorCode);
+          });
       })
       .catch((error) => {
         const errorCode = error.code;

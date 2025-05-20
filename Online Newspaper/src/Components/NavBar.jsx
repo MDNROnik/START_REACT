@@ -18,8 +18,12 @@ const NavBar = () => {
       <div className="login-btn flex gap-5 pt-2 pb-2">
         {user && (
           <div className="flex gap-2 items-center">
-            <img src={userImg} alt="" className="h-12 w-12" />
-            <p>{user.email}</p>
+            <img
+              src={user ? user.photoURL : userImg}
+              alt=""
+              className="h-12 w-12"
+            />
+            <p>{user.displayName}</p>
             <button
               onClick={() => {
                 signOutUser()
