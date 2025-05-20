@@ -3,6 +3,7 @@ import Login from "../Components/Login";
 import Signup from "../Components/Signup";
 import AuthLayout from "../Layout/AuthLayout";
 import HomeLayout from "../Layout/HomeLayout";
+import NewsLayout from "../Layout/NewsLayout";
 import CategoryNews from "../Pages/CategoryNews";
 
 const Router = createBrowserRouter([
@@ -23,8 +24,10 @@ const Router = createBrowserRouter([
     ],
   },
   {
-    path: "/news",
-    element: <h1>NEWS</h1>,
+    path: "/news/:id",
+    element: <NewsLayout />,
+    // eslint-disable-next-line no-unused-vars
+    loader: async ({ params }) => await fetch("../../public/News.json"),
   },
   {
     path: "/auth",
