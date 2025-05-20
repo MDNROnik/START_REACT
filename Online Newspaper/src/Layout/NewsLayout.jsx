@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import Header from "../Components/Header";
+import NavBar from "../Components/NavBar";
 import NewsCardDetails from "../Components/NewsCardDetails";
 import RightComponents from "../Components/RightComponents";
 
@@ -17,6 +18,9 @@ const NewsLayout = () => {
       <header className="py-3">
         <Header></Header>
       </header>
+      <nav className="bg-gray-100 py-3">
+        <NavBar />
+      </nav>
       <main className="w-11/12 mx-auto grid grid-cols-12 gap-5 py-10">
         <section className="col-span-9">
           <h2 className="font-bold mb-5">News Details</h2>
