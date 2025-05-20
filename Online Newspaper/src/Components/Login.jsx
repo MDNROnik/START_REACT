@@ -1,18 +1,32 @@
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
 const Login = () => {
-  // eslint-disable-next-line no-unused-vars
+  const { signInUser } = useContext(AuthContext);
+
   const [error, setError] = useState("");
-  const location = useLocation();
-  // eslint-disable-next-line no-unused-vars
+  //const location = useLocation();
+
   const navigate = useNavigate();
-  console.log(location);
+  //console.log(location);
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log({ email, password });
+    signInUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate("/catagory/0");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        // const errorMessage = error.message;
+        // alert(errorCode, errorMessage);
+        setError(errorCode);
+      });
   };
   return (
     <div className="flex justify-center p-6 items-center ">
