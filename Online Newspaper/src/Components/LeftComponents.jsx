@@ -14,11 +14,15 @@ const LeftComponents = () => {
       });
   }, []);
 
+  if(!catagory) {
+    return <span className="loading loading-ring loading-xl"></span>;
+  }
+
   return (
     <div>
       <h2 className="font-bold">All Categories </h2>
       <div className="grid grid-cols-1 mt-5 gap-3">
-        {catagory?.map((cat) => (
+        {catagory.map((cat) => (
           <NavLink
             to={`/catagory/${cat.id}`}
             key={cat.id}

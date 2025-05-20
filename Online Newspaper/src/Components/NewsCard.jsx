@@ -1,7 +1,8 @@
-import { FaEye, FaRegBookmark, FaShareAlt, FaStar } from "react-icons/fa";
+import { FaEye, FaRegBookmark, FaShareAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const NewsCared = ({ news }) => {
+  // eslint-disable-next-line no-unused-vars
   const { title, author, thumbnail_url, details, rating, total_view } = news;
   const formattedDate = new Date(author.published_date).toLocaleDateString();
   return (
@@ -46,7 +47,10 @@ const NewsCared = ({ news }) => {
         {details.length > 200 ? (
           <>
             {details.slice(0, 200)}...
-            <Link to={`/news/${news.id}`} className="text-primary font-semibold cursor-pointer hover:underline">
+            <Link
+              to={`/news/${news.id}`}
+              className="text-primary font-semibold cursor-pointer hover:underline"
+            >
               Read More
             </Link>
           </>
@@ -58,12 +62,12 @@ const NewsCared = ({ news }) => {
       {/* Footer */}
       <div className="flex justify-between items-center px-4 py-3 border-t border-base-200 mt-3">
         {/* Rating */}
-        <div className="flex items-center gap-1 text-orange-400">
+        {/* <div className="flex items-center gap-1 text-orange-400">
           {Array.from({ length: rating.number }).map((_, i) => (
             <FaStar key={i} />
           ))}
           <span className="ml-2 text-gray-600">{rating.number}</span>
-        </div>
+        </div> */}
 
         {/* Views */}
         <div className="flex items-center gap-2 text-gray-500">

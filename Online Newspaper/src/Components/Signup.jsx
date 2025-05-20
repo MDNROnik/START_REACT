@@ -21,7 +21,7 @@ const Signup = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log({ name, photo, email, password });
+    // console.log({ name, photo, email, password });
     createNewUser(email, password)
       .then((result) => {
         // eslint-disable-next-line no-unused-vars

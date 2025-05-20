@@ -14,7 +14,6 @@ const CategoryNews = () => {
       const filteredNews = data.filter(
         (news) => news.others.is_today_pick == true
       );
-
       setNews(filteredNews);
     } else {
       const filteredNews = data.filter((news) => news.category_id == id);
@@ -25,11 +24,15 @@ const CategoryNews = () => {
     // console.log("====================================");
   }, [id]);
 
+  if (!news) {
+    return <span className="loading loading-ring loading-xl"></span>;
+  }
+
   return (
     <div>
       <h1>CategoryNews {id}</h1>
       <h2>News {news.length}</h2>
-      {news?.map((singleNews) => (
+      {news.map((singleNews) => (
         <NewsCard key={singleNews.id} news={singleNews}></NewsCard>
       ))}
     </div>

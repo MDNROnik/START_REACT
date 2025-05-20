@@ -28,10 +28,10 @@ const NavBar = () => {
               onClick={() => {
                 signOutUser()
                   .then(() => {
-                    console.log("sign out");
+                    // console.log("sign out");
                   })
                   .catch((error) => {
-                    console.log(error);
+                    // console.log(error);
                   });
               }}
               className="btn btn-primary px-3 "
