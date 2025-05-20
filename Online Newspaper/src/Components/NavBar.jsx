@@ -1,5 +1,5 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router";
-import React, { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import userImg from "../assets/User.png";
 const NavBar = () => {
@@ -13,14 +13,14 @@ const NavBar = () => {
         <NavLink to="/career">Career</NavLink>
       </div>
       <div className="login-btn flex gap-5 pt-2 pb-2">
-        {user && (
+        {/* {user && (
           <div className="flex gap-2 items-center">
             <img src={userImg} alt="" className="h-12 w-12" />
             <p>{user}</p>
           </div>
         )}
-        {!user && <p>Login</p>}
-        {/* <img src={userImg} alt="" className="h-12 w-12" /> */}
+        {!user && <p>Login</p>} */}
+        <img src={userImg} alt="" className="h-12 w-12" />
         <Link to={"/auth/login"} className="btn btn-primary px-10 ">
           Login
         </Link>

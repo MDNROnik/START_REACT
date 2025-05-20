@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Signup = () => {
   const [nameError, setNameError] = useState("");
-  // eslint-disable-next-line no-unused-vars
+
   const navigate = useNavigate();
+  const { createNewUser } = useContext(AuthContext);
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const form = e.target;
     const name = form.name.value;
     if (name.length < 5) {
@@ -21,6 +22,17 @@ const Signup = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log({ name, photo, email, password });
+    createNewUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage, errorCode);
+        // ..
+      });
   };
   return (
     <div className="flex justify-center p-6 items-center">
